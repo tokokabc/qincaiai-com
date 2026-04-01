@@ -1,12 +1,6 @@
 <?php
 /*
- * @Author: iowen
- * @Author URI: https://www.iowen.cn/
- * @Date: 2024-08-20 22:31:36
- * @LastEditors: iowen
- * @LastEditTime: 2026-04-02 00:21:00
- * @FilePath: /onenav/inc/functions/io-home.php
- * @Description:
+ * Qincai homepage shell.
  */
 
 function io_qincai_left_categories() {
@@ -35,6 +29,26 @@ function io_qincai_left_categories() {
     );
 }
 
+function io_qincai_center_sections() {
+    return array(
+        array(
+            'title' => 'AI 工具精选',
+            'desc'  => '优先展示聊天、写作、绘图、视频、办公与编程类高频入口。',
+            'cards' => array('ChatGPT', 'Claude', 'Kimi', '豆包', 'Cursor', 'Midjourney'),
+        ),
+        array(
+            'title' => 'AI 平台 / 模型',
+            'desc'  => '面向大模型、MaaS、Agent 与开发平台的中台入口。',
+            'cards' => array('DeepSeek', 'Gemini', 'OpenClaw', 'Dify', 'Coze', '硅基流动'),
+        ),
+        array(
+            'title' => 'AI 教程 / 资讯',
+            'desc'  => '把教程资源、学习网站、提示词、资讯内容集中到首页中区。',
+            'cards' => array('提示词库', 'AI教程合集', '部署指南', '实战案例', 'AI资讯快讯', 'Agent周报'),
+        ),
+    );
+}
+
 function io_home_content($config)
 {
     if (empty($config['page_module'])) {
@@ -54,6 +68,7 @@ function io_home_content($config)
     }
 
     echo '<div class="qincai-center-content">';
+    echo '<div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排。</p></div>';
     io_show_page_module($config['page_module']);
     echo '</div>';
 
@@ -70,62 +85,36 @@ function io_show_layout_aside($modules){
     foreach ($categories as $item) {
         $nav .= '<li class="aside-item"><a href="' . esc_url($item['href']) . '" class="aside-btn hide-target smooth"><i class="' . esc_attr($item['icon']) . ' icon-fw"></i><span class="ml-2 qincai-aside-text">' . esc_html($item['name']) . '</span></a></li>';
     }
-
-    $aside = '<aside class="ioui-aside switch-container' . get_page_mode_class() . '">';
-    $aside .= '<div class="aside-body" id="layout_aside">';
-    $aside .= '<div class="aside-card blur-bg shadow h-100">';
-    $aside .= '<ul class="aside-ul overflow-y-auto no-scrollbar">';
-    $aside .= $nav;
-    $aside .= '</ul>';
-    $aside .= '</div>';
-    $aside .= '</div>';
-    $aside .= '</aside>';
-
-    echo $aside;
+    echo '<aside class="ioui-aside switch-container' . get_page_mode_class() . '"><div class="aside-body" id="layout_aside"><div class="aside-card blur-bg shadow h-100"><ul class="aside-ul overflow-y-auto no-scrollbar">' . $nav . '</ul></div></div></aside>';
 }
 
 function io_show_page_module($modules)
 {
-    foreach ($modules as $index => $module) {
-        switch ($module['type']) {
-            case 'search':
-                io_module_search($module['search_config'], $index);
-                if (!$index) {
-                    do_action('io_home_content_before');
-                }
-                break;
-            case 'content':
-                if (!$index) {
-                    do_action('io_home_content_before');
-                }
-                io_module_content($module['content_config'], $index);
-                break;
-            case 'tools':
-                if (!$index) {
-                    do_action('io_home_content_before');
-                }
-                io_module_tools($module['tools_config'], $index);
-                break;
-            case 'custom':
-                if (!$index) {
-                    do_action('io_home_content_before');
-                }
-                io_module_custom($module['custom_config'], $index);
-                break;
+    $sections = io_qincai_center_sections();
+    foreach ($sections as $index => $section) {
+        echo '<section id="module_id_' . ($index + 1) . '" class="qincai-home-module qincai-home-module--manual">';
+        echo '<div class="content-layout">';
+        echo '<div class="content-card">';
+        echo '<div class="tab-title">' . esc_html($section['title']) . '</div>';
+        echo '<p class="text-sm">' . esc_html($section['desc']) . '</p>';
+        echo '<div class="qincai-module-grid">';
+        foreach ($section['cards'] as $card) {
+            echo '<a class="qincai-module-card" href="#">';
+            echo '<span class="qincai-module-card__title">' . esc_html($card) . '</span>';
+            echo '<span class="qincai-module-card__meta">进入查看</span>';
+            echo '</a>';
         }
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</section>';
     }
-    do_action('io_home_content_after');
 }
 
-function io_home_content_before_action(){
-    iopay_get_auto_ad_html('home', 'mb-4 container home-content', 'content');
-    show_ad('ad_home_card_top', true, 'container home-content');
-}
+function io_home_content_before_action(){}
 add_action('io_home_content_before', 'io_home_content_before_action');
 
-function io_home_content_after_action(){
-    show_ad('ad_home_link_top', true, 'container home-content');
-}
+function io_home_content_after_action(){}
 add_action('io_home_content_after', 'io_home_content_after_action');
 
 function io_module_search($config, $index){
@@ -135,149 +124,8 @@ function io_module_search($config, $index){
 function io_module_is_there_sidebar($config, &$is_sidebar, &$sidebar_id) {
     $sidebar_id = '';
     $is_sidebar = false;
-    if ('none' !== $config['sidebar_tools']) {
-        $sidebar_id = 'sidebar-home-content-' . $config['sidebar_id'];
-        if (is_mininav()) {
-            $module_id  = get_query_var('module_list_id');
-            $sidebar_id = 'sidebar-second-content-' . $module_id . '-' . $config['sidebar_id'];
-        }
-        if ((is_active_sidebar($sidebar_id))) {
-            $is_sidebar = true;
-        }
-    }
 }
 
-function io_module_content($config, $index = 0){
-    if (!isset($config['nav_id']) || empty($config['nav_id'])) {
-        return;
-    }
-    $menu = get_menu_items_by_level($config['nav_id']);
-    $card = $config['show_card'] ? ' show-card' : '';
-    io_module_is_there_sidebar($config, $is_sidebar, $sidebar_id);
-    $sidebar_class = $is_sidebar ? 'sidebar_' . $config['sidebar_tools'] : 'sidebar_no';
-    $style_attr = get_div_custom_background($config, $card);
-    do_action('io_module_content_before', $config, $index);
-    echo '<section id="module_id_' . $index . '" class="custom-background module-id-' . $index . '" ' . $style_attr . '>';
-    echo '<div class="ioui-content switch-container home-container ' . $sidebar_class . get_page_mode_class() . '">';
-    echo '<div class="ioui-main">';
-    echo '<div class="content-wrap">';
-    echo '<div class="content-layout' . $card . '">';
-    foreach($menu as $category) {
-        if ($category['menu_item_parent'] == 0) {
-            if (empty($category['children'])) {
-                $terms = get_menu_category_list();
-                if ($category['type'] != 'taxonomy') {
-                    $url = trim($category['url']);
-                    if (strlen($url) > 1) {
-                        if (substr($url, 0, 1) == '#' || substr($url, 0, 4) == 'http')
-                            continue;
-                        echo get_none_html("“{$category['title']}”不支持的菜单项，请到菜单删除", 'home-list content-card', 'error', false);
-                    }
-                } elseif ($category['type'] == 'taxonomy' && in_array($category['object'], $terms)) {
-                    io_home_a_content($config['nav_id'], $category, $is_sidebar);
-                } else {
-                    echo get_none_html("“{$category['title']}”不支持的菜单项，请到菜单删除", 'home-list content-card', 'error', false);
-                }
-            } else {
-                $is_null = true;
-                foreach ($category['children'] as $mid) {
-                    if ($mid['type'] != 'taxonomy') {
-                        continue;
-                    }
-                    $is_null = false;
-                }
-                if ($is_null)
-                    continue;
-                io_home_tab_content($config['nav_id'], $category['children'], $category, $config['tab_ajax'], $is_sidebar);
-            }
-        }
-    }
-    echo '</div>';
-    echo '</div>';
-    if($is_sidebar){
-        echo '<div class="sidebar sidebar-tools d-none d-lg-block">';
-        dynamic_sidebar($sidebar_id);
-        echo '</div>';
-    }
-    echo '</div>';
-    echo '</div>';
-    echo '</section>';
-    do_action('io_module_content_after', $config, $index);
-}
-
-function io_module_tools($config, $index) {
-    global $is_sidebar;
-    io_module_is_there_sidebar($config, $is_sidebar, $sidebar_id);
-    $sidebar_class = $is_sidebar ? 'sidebar_' . $config['sidebar_tools'] : 'sidebar_no';
-    $style_attr = get_div_custom_background($config, $card);
-    $tools     = '';
-    $module_name = '首页-模块' . ($index + 1);
-    $tool_id     = 'max-home-tools-' . $config['tool_id'];
-    if (is_mininav()) {
-        $module_id   = get_query_var('module_list_id');
-        $module_name = '子ID' . $module_id . '-模块' . ($index + 1);
-        $tool_id     = 'max-second-tools-' . $module_id . '-' . $config['tool_id'];
-    }
-    if (!is_active_sidebar($tool_id)) {
-        if (is_super_admin()) {
-            $tools = '<div class="card"><div class="card-body py-5 text-center"><p>' . $module_name . ' 的[小工具]内容为空，请到后台添加</p> <a href="' . admin_url('widgets.php') . '" class="btn vc-l-purple" target="_blank">小工具编辑</a></div></div>';
-        } else {
-            return;
-        }
-    }
-    do_action('io_module_tools_before', $config, $index);
-    echo '<section id="module_id_' . $index . '" class="custom-background module-id-' . $index . '" ' . $style_attr . '>';
-    echo '<div class="ioui-content switch-container home-container ' . $sidebar_class . get_page_mode_class() . '">';
-    echo '<div class="ioui-main">';
-    echo '<div class="content-wrap">';
-    echo '<div class="content-layout' . $card . '">';
-    if (empty($tools)) {
-        dynamic_sidebar($tool_id);
-    } else {
-        echo $tools;
-    }
-    echo '</div>';
-    echo '</div>';
-    if($is_sidebar){
-        echo '<div class="sidebar sidebar-tools d-none d-lg-block">';
-        dynamic_sidebar($sidebar_id);
-        echo '</div>';
-    }
-    echo '</div>';
-    echo '</div>';
-    echo '</section>';
-    do_action('io_module_tools_after', $config, $index);
-}
-
-function io_module_custom($config, $index){
-    io_module_is_there_sidebar($config, $is_sidebar, $sidebar_id);
-    $sidebar_class = $is_sidebar ? 'sidebar_' . $config['sidebar_tools'] : 'sidebar_no';
-    $style_attr = get_div_custom_background($config, $card);
-    $html = $config['html_code'];
-    if (empty($html)) {
-        if (is_super_admin()) {
-            $_tab = is_mininav() ? '子页面布局' : '';
-            $html = '<div class="card"><div class="card-body py-5 text-center"><p>自定义模块 (id: ' . $index . ') 内容为空，请到后台编辑</p> <a href="' . io_get_admin_iocf_url($_tab, 'home_module') . '" class="btn vc-l-purple" target="_blank">后台编辑</a></div></div>';
-        } else {
-            return;
-        }
-    }
-    do_action('io_module_custom_before', $config, $index);
-    echo '<section id="module_id_' . $index . '" class="custom-background module-id-' . $index . '" ' . $style_attr . '>';
-    echo '<div class="ioui-content switch-container home-container ' . $sidebar_class . get_page_mode_class() . '">';
-    echo '<div class="ioui-main">';
-    echo '<div class="content-wrap">';
-    echo '<div class="content-layout' . $card . '">';
-    echo $html;
-    echo '</div>';
-    echo '</div>';
-    if($is_sidebar){
-        echo '<div class="sidebar sidebar-tools d-none d-lg-block">';
-        dynamic_sidebar($sidebar_id);
-        echo '</div>';
-    }
-    echo '</div>';
-    echo '</div>';
-    echo '</section>';
-    do_action('io_module_custom_after', $config, $index);
-}
+function io_module_content($config, $index = 0){}
+function io_module_tools($config, $index) {}
+function io_module_custom($config, $index){}

@@ -1,6 +1,23 @@
 .qincai-home-page{background:linear-gradient(180deg,#f4f7fb 0%,#f7f8fa 42%,#f3f4f6 100%);padding-bottom:40px;scroll-behavior:smooth;}
 .qincai-home-page *{box-sizing:border-box;}
 .qincai-home-page .container,.qincai-home-page .container-header{max-width:1280px;}
+.qincai-header .header-nav{background:rgba(255,255,255,.92)!important;backdrop-filter:blur(14px);border-bottom:1px solid #e6edf5;box-shadow:0 8px 20px rgba(15,23,42,.04);}
+.qincai-nav-top{max-width:1280px;margin:0 auto;padding:0 16px;justify-content:space-between;min-height:76px;}
+.qincai-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;min-width:0;}
+.qincai-brand__mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:800;box-shadow:0 12px 24px rgba(34,197,94,.24);}
+.qincai-brand__text{display:flex;flex-direction:column;min-width:0;}
+.qincai-brand__text strong{font-size:17px;line-height:1.2;color:#0f172a;}
+.qincai-brand__text small{font-size:12px;line-height:1.35;color:#64748b;}
+.qincai-navbar-header-menu{display:flex;align-items:center;min-width:0;flex:1 1 auto;overflow:hidden;margin-right:16px;}
+.qincai-navbar-header{display:flex!important;align-items:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none;}
+.qincai-navbar-header::-webkit-scrollbar{display:none;}
+.qincai-navbar-header>.menu-item{flex:0 0 auto;list-style:none;}
+.qincai-navbar-header>.menu-item>a{display:inline-flex;align-items:center;height:40px;padding:0 14px;border-radius:12px;color:#334155;font-size:14px;font-weight:700;text-decoration:none;transition:.2s ease;}
+.qincai-navbar-header>.menu-item>a:hover{background:#ecfdf3;color:#15803d;}
+.qincai-header-tools{gap:10px;flex:0 0 auto;}
+.qincai-header-tools .header-icon-btn>a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;background:#f8fafc;color:#334155;text-decoration:none;transition:.2s ease;}
+.qincai-header-tools .header-icon-btn>a:hover{background:#ecfdf3;color:#15803d;}
+.qincai-mobile-nav{display:none;}
 .qincai-home-shell{max-width:1280px;margin:0 auto;padding:22px 16px 0;}
 .qincai-home-shell--ready{padding-bottom:12px;}
 .qincai-home-intro{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:20px;}
@@ -116,5 +133,5 @@
 .qincai-qrcode-panel__box{display:flex;align-items:center;justify-content:center;padding:10px 0 8px;}
 .qincai-qrcode-panel__placeholder{width:148px;height:148px;border-radius:18px;border:1px dashed #cbd5e1;background:repeating-linear-gradient(45deg,#f8fafc,#f8fafc 10px,#eef2f7 10px,#eef2f7 20px);display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:#64748b;font-size:13px;line-height:1.6;}
 @media (max-width:1279px){.qincai-main-grid{grid-template-columns:220px minmax(0,1fr);}.qincai-right-aside{grid-column:1/-1;position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}.qincai-home-intro{grid-template-columns:1fr;}.qincai-hero__content{grid-template-columns:1fr;}.qincai-hero__sidecard{order:-1;}}
-@media (max-width:991px){.qincai-home-shell{padding:16px 14px 0;}.qincai-main-grid{grid-template-columns:1fr;}.qincai-left-sidebar{position:static;top:auto;}.qincai-left-sidebar .aside-ul{max-height:none!important;}.qincai-right-aside{grid-template-columns:1fr;position:static;}.qincai-hero__inner{padding:24px 18px;border-radius:22px;}.qincai-hero__topbar,.qincai-hero__search{flex-direction:column;align-items:stretch;}.qincai-hero__title{font-size:30px;}.qincai-hero__stats{grid-template-columns:1fr 1fr 1fr;}.qincai-home-module .content-layout{padding:16px;}.qincai-home-module .content-layout::before{margin:-16px -16px 16px;}.qincai-panel,.qincai-left-sidebar,.qincai-center-content .content-layout{border-radius:18px;}}
+@media (max-width:991px){.qincai-nav-top{min-height:68px;}.qincai-navbar-header-menu{display:none;}.qincai-mobile-nav{display:block;position:sticky;top:68px;z-index:90;padding:10px 14px 0;background:transparent;}.qincai-mobile-nav__inner{display:flex;align-items:center;justify-content:space-between;gap:10px;background:rgba(255,255,255,.9);border:1px solid #e6edf5;box-shadow:0 10px 24px rgba(15,23,42,.05);border-radius:16px;padding:12px 14px;}.qincai-mobile-nav__brand{font-size:15px;font-weight:800;color:#0f172a;text-decoration:none;}.qincai-mobile-nav__search{display:inline-flex;align-items:center;justify-content:center;height:34px;padding:0 12px;border-radius:999px;background:#ecfdf3;color:#15803d;font-size:13px;font-weight:700;text-decoration:none;}.qincai-home-shell{padding:16px 14px 0;}.qincai-main-grid{grid-template-columns:1fr;}.qincai-left-sidebar{position:static;top:auto;}.qincai-left-sidebar .aside-ul{max-height:none!important;}.qincai-right-aside{grid-template-columns:1fr;position:static;}.qincai-hero__inner{padding:24px 18px;border-radius:22px;}.qincai-hero__topbar,.qincai-hero__search{flex-direction:column;align-items:stretch;}.qincai-hero__title{font-size:30px;}.qincai-hero__stats{grid-template-columns:1fr 1fr 1fr;}.qincai-home-module .content-layout{padding:16px;}.qincai-home-module .content-layout::before{margin:-16px -16px 16px;}.qincai-panel,.qincai-left-sidebar,.qincai-center-content .content-layout{border-radius:18px;}}
 @media (max-width:640px){.qincai-home-page{padding-bottom:24px;}.qincai-hero__inner{padding:20px 16px;}.qincai-hero__brand-mark{width:42px;height:42px;}.qincai-hero__title{font-size:26px;}.qincai-hero__desc{font-size:14px;line-height:1.75;}.qincai-hero__search-inputwrap,.qincai-hero__button{height:50px;border-radius:16px;}.qincai-primary-tabs{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none;}.qincai-primary-tabs::-webkit-scrollbar{display:none;}.qincai-primary-tab{flex:0 0 auto;}.qincai-hero__stats{grid-template-columns:1fr;}.qincai-home-intro{gap:12px;}.qincai-home-intro__item{min-height:auto;}.qincai-center-content__header h2{font-size:20px;}.qincai-left-sidebar,.qincai-center-content .content-layout,.qincai-panel{border-radius:16px;}}

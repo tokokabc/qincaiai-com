@@ -4,11 +4,10 @@
  * @Author URI: https://www.iowen.cn/
  * @Date: 2024-08-20 17:50:15
  * @LastEditors: iowen
- * @LastEditTime: 2025-06-04 16:49:09
+ * @LastEditTime: 2026-04-02 00:15:00
  * @FilePath: /onenav/inc/functions/io-header.php
- * @Description: 
+ * @Description:
  */
-
 
 function io_header()
 {
@@ -18,31 +17,41 @@ function io_header()
     io_loading_fx();
     io_show_header();
     io_show_mobile_header();
-
-    /**
-     * -----------------------------------------------------------------------
-     * HOOK : ACTION HOOK
-     * io_content_header_after_code
-     * 
-     * 在内容顶部菜单下后挂载其他内容
-     * @since   
-     * -----------------------------------------------------------------------
-     */
     do_action('io_content_header_after_code', get_queried_object_id());
 }
 
 function io_loading_fx(){
-    //蜘蛛爬虫则不显示
     if (io_is_spider()) {
         return;
     }
-    
     if (io_get_option('loading_fx', false)) {
         echo '<div id="loading_fx">';
         loading_type();
         echo '<script type="text/javascript"> document.addEventListener("DOMContentLoaded",()=>{const loader=document.querySelector("#loading_fx");if(loader){loader.classList.add("close");setTimeout(()=>loader.remove(),600)}}); </script>';
         echo '</div>';
     }
+}
+
+function io_qincai_header_menu_items(){
+    return array(
+        array('label' => 'AI 工具', 'href' => '#module_id_1'),
+        array('label' => 'AI大模型', 'href' => '#module_id_2'),
+        array('label' => 'AI云端部署', 'href' => '#module_id_3'),
+        array('label' => 'AI教程资源', 'href' => '#module_id_4'),
+        array('label' => 'AI资讯', 'href' => '#module_id_5'),
+        array('label' => 'Claw生态', 'href' => '#module_id_6'),
+    );
+}
+
+function io_qincai_render_main_nav(){
+    $items = io_qincai_header_menu_items();
+    echo '<div class="qincai-navbar-header-menu">';
+    echo '<ul class="nav navbar-header qincai-navbar-header d-none d-md-flex mr-3">';
+    foreach ($items as $item) {
+        echo '<li class="menu-item"><a href="' . esc_url($item['href']) . '">' . esc_html($item['label']) . '</a></li>';
+    }
+    echo '</ul>';
+    echo '</div>';
 }
 
 /**
@@ -58,73 +67,40 @@ function io_show_header(){
         $more       = '<div class="more-menu-list"><i></i><i></i><i></i><i></i></div>';
         $more .= io_get_min_nav_menu_btn($nav_menu_list);
     }
-    
-    echo '<header class="main-header header-fixed">';
-    echo '<div class="header-nav blur-bg">';
-    echo '<nav class="switch-container container-header nav-top ' . io_get_option('mobile_header_layout', 'header-center') . ' d-flex align-items-center h-100' . get_page_mode_class() . '">';
 
-    echo '<div class="navbar-logo d-flex mr-4">';
+    echo '<header class="main-header header-fixed qincai-header">';
+    echo '<div class="header-nav blur-bg">';
+    echo '<nav class="switch-container container-header nav-top qincai-nav-top ' . io_get_option('mobile_header_layout', 'header-center') . ' d-flex align-items-center h-100' . get_page_mode_class() . '">';
+
+    echo '<div class="navbar-logo d-flex mr-4 qincai-navbar-logo">';
     echo io_get_logo_html();
     echo '<div class="' . $logo_class . '">';
     echo $more;
     echo '</div>';
     echo '</div>';
 
-    if (io_get_option('weather', false) && io_get_option('weather_location', 'header') == 'header') {
-        echo '<div class="header-weather d-none d-md-block mr-4">';
-        $placeholder = '<div class="header-weather-p"><span></span><span></span><span></span></div>';
-        io_get_weather_widget($placeholder);
-        echo '</div>';
-    }
-    echo '<div class="navbar-header-menu">';
-    
-    echo '<ul class="nav navbar-header d-none d-md-flex mr-3">';
-    io_nav_menu('main_menu');
-    echo '<li class="menu-item io-menu-fold hide"><a href="javascript:void(0);"><i class="iconfont icon-dian"></i></a><ul class="sub-menu"></ul></li>';
-    echo '</ul>';
-    echo '</div>';
+    io_qincai_render_main_nav();
 
-    echo '<div class="flex-fill"></div>';
+    echo '<div class="flex-fill qincai-header-fill"></div>';
 
-    /**
-     * -----------------------------------------------------------------------
-     * HOOK : ACTION HOOK
-     * io_header_after_code
-     * 
-     * 顶部菜单后面挂载其他内容
-     * @since 5.0
-     * -----------------------------------------------------------------------
-     */
-    do_action( 'io_header_after_code' , get_queried_object_id() ); 
+    do_action('io_header_after_code', get_queried_object_id());
 
-    echo '<ul class="nav header-tools position-relative">';
-    if (io_get_option('hitokoto', false)) {
-        echo '<li class="nav-item mr-2 d-none d-xxl-block">';
-        echo '<div class="text-sm line1">';
-        echo io_get_option('hitokoto_code', '');
-        echo '</div>';
-        echo '</li>';
-    }
-
+    echo '<ul class="nav header-tools position-relative qincai-header-tools">';
     if (io_get_option('nav_login', false)) {
         $login_url = esc_url(wp_login_url(io_get_current_url()));
-        if(is_user_logged_in()){
+        if (is_user_logged_in()) {
             $login_url = 'javascript:;';
         }
         $menu_user_box = io_get_menu_user_box();
         $menu_user_box = $menu_user_box ? '<ul class="sub-menu mt-5">' . $menu_user_box . '</ul>' : '';
-
         echo '<li class="header-icon-btn nav-login d-none d-md-block">';
         echo '<a href="' . $login_url . '"><i class="iconfont icon-user icon-lg"></i></a>';
         echo $menu_user_box;
         echo '</li>';
     }
-    
-    // 搜索按钮
     echo '<li class="header-icon-btn nav-search">';
     echo '<a href="javascript:" class="search-ico-btn nav-search-icon" data-toggle-div data-target="#search-modal" data-z-index="101"><i class="search-bar"></i></a>';
     echo '</li>';
-
     echo '</ul>';
 
     echo '<div class="d-block d-md-none menu-btn" data-toggle-div data-target=".mobile-nav" data-class="is-mobile" aria-expanded="false">';
@@ -137,9 +113,7 @@ function io_show_header(){
     echo '</header>';
 }
 
-
 function io_show_mobile_header(){
-
     $html = '<div class="mobile-header">';
     $html .= '<nav class="mobile-nav">';
     $html .= '<ul class="menu-nav mb-4">';
@@ -148,10 +122,8 @@ function io_show_mobile_header(){
     $html .= io_get_menu_user_box('mb-4');
     $html .= '</nav>';
     $html .= '</div>';
-
     echo $html;
 }
-
 
 function io_get_logo_html($h1 = false)
 {
@@ -180,15 +152,9 @@ function io_get_logo_html($h1 = false)
     return $html;
 }
 
-/**
- * 获取 header 内容
- * @return void
- */
 function io_get_head_content(){
     io_auto_theme_mode();
     io_custom_theme_css();
-
-    //自定义头部代码
     echo io_get_option('code_2_header','');
 }
 add_action('wp_head','io_get_head_content');
@@ -230,7 +196,6 @@ function io_custom_theme_css() {
     if (io_get_option('home_width', '')) {
         $root .= '--home-max-width:' . io_get_option('home_width', 1900) . 'px;';
     }
-    
     if (io_get_option('main_radius', '') >= 0) {
         $root .= '--main-radius:' . io_get_option('main_radius', 12) . 'px;';
     }
@@ -240,7 +205,6 @@ function io_custom_theme_css() {
     }else{
         $root .= '--main-max-width:' . io_get_option('main_width', 1260) . 'px;';
     }
-    
     $css = '';
     if (!empty($root)) {
         $css .= ':root{' . $root . '}';

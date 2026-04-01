@@ -1,10 +1,15 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
-$hot_tags = array('OpenClaw', 'ChatGPT', 'Gemini', 'DeepSeek', 'Claude', 'Kimi');
+$hot_tags = array('OpenClaw', 'ChatGPT', 'Gemini', 'DeepSeek', 'Claude', 'Kimi', 'Cursor', 'Runway');
+$hero_stats = array(
+    array('num' => '1000+', 'label' => '精选工具'),
+    array('num' => '21', 'label' => '核心分类'),
+    array('num' => 'Daily', 'label' => '持续更新'),
+);
 ?>
 <section class="qincai-hero container">
     <div class="qincai-hero__inner">
-        <div class="qincai-hero__content qincai-hero__content--single">
+        <div class="qincai-hero__content qincai-hero__content--split">
             <div class="qincai-hero__main">
                 <p class="qincai-hero__eyebrow">芹菜AI工具导航平台</p>
                 <h1 class="qincai-hero__title">发现最好用的 AI 工具、平台与 Claw 生态入口</h1>
@@ -25,6 +30,22 @@ $hot_tags = array('OpenClaw', 'ChatGPT', 'Gemini', 'DeepSeek', 'Claude', 'Kimi')
                         <?php endforeach; ?>
                     </div>
                 </div>
+            </div>
+            <div class="qincai-hero__stats-panel">
+                <h3>平台速览</h3>
+                <div class="qincai-hero__stats-grid">
+                    <?php foreach ($hero_stats as $item) : ?>
+                        <div class="qincai-hero__stat-box">
+                            <strong><?php echo esc_html($item['num']); ?></strong>
+                            <span><?php echo esc_html($item['label']); ?></span>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <ul class="qincai-hero__bullet-list">
+                    <li>AI 工具 / 大模型 / 云部署</li>
+                    <li>教程资源 / AI资讯 / Claw生态</li>
+                    <li>支持平台化首页持续扩展</li>
+                </ul>
             </div>
         </div>
     </div>

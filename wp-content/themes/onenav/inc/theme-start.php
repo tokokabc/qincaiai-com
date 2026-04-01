@@ -283,6 +283,11 @@ function theme_load_scripts() {
         wp_enqueue_style($key, $href, array(), get_assets_version($href), 'all');
     }
 
+    if (is_home() || is_front_page() || is_mininav()) {
+        $qincai_css = get_theme_file_uri('/assets/css/home-qincai.css');
+        wp_enqueue_style('home-qincai', $qincai_css, array('main'), get_assets_version($qincai_css), 'all');
+    }
+
     $js = array(
         'jquery'       => ['jquery.min.js', [], false],
         'bootstrap-js' => ['bootstrap.bundle.min.js', ['jquery'], true],

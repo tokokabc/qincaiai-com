@@ -27,9 +27,11 @@ function io_qincai_left_categories() {
 }
 function io_qincai_center_sections() {
     return array(
-        array('title' => 'AI 工具精选', 'desc' => '聊天、写作、绘图、视频、办公、编程等高频入口。', 'cards' => array('ChatGPT', 'Claude', 'Kimi', '豆包', 'Cursor', 'Midjourney')),
-        array('title' => 'AI 平台 / 模型', 'desc' => '大模型、MaaS、Agent、开发平台等中台入口。', 'cards' => array('DeepSeek', 'Gemini', 'OpenClaw', 'Dify', 'Coze', '硅基流动')),
-        array('title' => 'AI 教程 / 资讯', 'desc' => '教程资源、学习网站、提示词、资讯内容集中展示。', 'cards' => array('提示词库', 'AI教程合集', '部署指南', '实战案例', 'AI资讯快讯', 'Agent周报')),
+        array('title' => 'AI 工具精选', 'desc' => '聊天、写作、绘图、视频、办公、编程等高频入口。', 'cards' => array('ChatGPT','Claude','Kimi','豆包','Cursor','Midjourney','Notion AI','Canva AI','Runway','Gamma','Suno','Perplexity')),
+        array('title' => 'AI 平台 / 模型', 'desc' => '大模型、MaaS、Agent、开发平台等中台入口。', 'cards' => array('DeepSeek','Gemini','OpenClaw','Dify','Coze','硅基流动','通义千问','文心一言','Moonshot','扣子空间','百炼','腾讯元宝')),
+        array('title' => 'AI 教程 / 资讯', 'desc' => '教程资源、学习网站、提示词、资讯内容集中展示。', 'cards' => array('提示词库','AI教程合集','部署指南','实战案例','AI资讯快讯','Agent周报','模型评测','工具盘点','入门路线图','学习导航','行业观察','自动化案例')),
+        array('title' => 'Claw / Agent 生态', 'desc' => '聚合 Claw 小龙虾、Agent 生态、支付、Skills 市场等场景。', 'cards' => array('Claw小龙虾','Agent生态','Agent支付','AISkills市场','AIMaaS平台','AI开发平台','云端部署','Coding Plan','自动化工作流','多Agent协作','技能商店','企业入口')),
+        array('title' => '设计 / 办公 / 音频', 'desc' => '把办公效率、音频创作、设计生产力补齐到首页中部。', 'cards' => array('Figma AI','Photoshop AI','剪映AI','讯飞听见','Suno','Adobe Firefly','WPS AI','飞书智能伙伴','AI思维导图','会议纪要','配音工具','音乐生成')),
     );
 }
 function io_home_content($config){
@@ -42,7 +44,7 @@ function io_home_content($config){
         io_show_layout_aside($config['page_module']);
         echo '</div>';
     }
-    echo '<div class="qincai-center-content"><div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排。</p></div>';
+    echo '<div class="qincai-center-content"><div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排，提高模块数量、卡片密度与主内容区信息量。</p></div>';
     io_show_page_module($config['page_module']);
     echo '</div>';
     get_template_part('templates/home-right-aside');
@@ -57,9 +59,12 @@ function io_show_layout_aside($modules){
 }
 function io_show_page_module($modules){
     foreach (io_qincai_center_sections() as $index => $section) {
-        echo '<section id="module_id_' . ($index + 1) . '" class="qincai-home-module qincai-home-module--manual"><div class="content-layout"><div class="content-card"><div class="tab-title">' . esc_html($section['title']) . '</div><p class="text-sm">' . esc_html($section['desc']) . '</p><div class="qincai-module-grid">';
+        echo '<section id="module_id_' . ($index + 1) . '" class="qincai-home-module qincai-home-module--manual">';
+        echo '<div class="content-layout"><div class="content-card">';
+        echo '<div class="qincai-module-head"><div><div class="tab-title">' . esc_html($section['title']) . '</div><p class="text-sm">' . esc_html($section['desc']) . '</p></div><a class="btn-more" href="#">查看更多</a></div>';
+        echo '<div class="qincai-module-grid">';
         foreach ($section['cards'] as $card) {
-            echo '<a class="qincai-module-card" href="#"><span class="qincai-module-card__title">' . esc_html($card) . '</span><span class="qincai-module-card__meta">进入查看</span></a>';
+            echo '<a class="qincai-module-card" href="#"><span class="qincai-module-card__title">' . esc_html($card) . '</span><span class="qincai-module-card__meta">立即进入</span></a>';
         }
         echo '</div></div></div></section>';
     }

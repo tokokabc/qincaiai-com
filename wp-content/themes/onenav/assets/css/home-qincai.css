@@ -3,9 +3,10 @@
 .qincai-home-page .container,.qincai-home-page .container-header{max-width:1280px;}
 .qincai-header .header-nav{background:rgba(255,255,255,.96)!important;backdrop-filter:blur(14px);border-bottom:1px solid #e6edf5;box-shadow:0 8px 20px rgba(15,23,42,.04);}
 .qincai-header-row{max-width:1280px;margin:0 auto;min-height:76px;padding:0 16px;display:flex;align-items:center;gap:18px;}
-.qincai-header-brand{display:flex;align-items:center;flex:0 0 auto;min-width:0;max-width:280px;}
-.qincai-header-brand .logo-expanded,.qincai-header-brand .logo-mini,.qincai-header-brand .custom-logo-link,.qincai-header-brand>a{display:inline-flex!important;align-items:center;max-width:100%;text-decoration:none;}
-.qincai-header-brand img,.qincai-header-brand .custom-logo{max-height:40px;width:auto;display:block;}
+.qincai-header-brand{display:flex;align-items:center;flex:0 0 auto;min-width:0;max-width:220px;overflow:hidden;}
+.qincai-header-brand .logo-expanded,.qincai-header-brand .logo-mini,.qincai-header-brand .custom-logo-link,.qincai-header-brand>a{display:inline-flex!important;align-items:center;max-width:100%;text-decoration:none;overflow:hidden;}
+.qincai-header-brand img,.qincai-header-brand .custom-logo{max-height:40px;width:auto;display:block;flex:0 0 auto;}
+.qincai-header-brand .site-name,.qincai-header-brand .logo-title,.qincai-header-brand .logo-subtitle,.qincai-header-brand small,.qincai-header-brand .text-xs,.qincai-header-brand .text-sm{display:none!important;}
 .qincai-brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;min-width:0;}
 .qincai-brand__mark{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#22c55e,#16a34a);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:800;box-shadow:0 12px 24px rgba(34,197,94,.24);}
 .qincai-brand__text{display:flex;flex-direction:column;min-width:0;overflow:hidden;}

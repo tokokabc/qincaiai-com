@@ -8,7 +8,7 @@ $latest_items = array(
     array('name' => 'FlowAgent', 'desc' => '可视化工作流平台'),
 );
 ?>
-<aside class="qincai-right-aside d-none d-lg-flex">
+<aside class="qincai-right-aside">
     <section class="qincai-panel">
         <div class="qincai-panel__header">
             <h3>热门排行</h3>

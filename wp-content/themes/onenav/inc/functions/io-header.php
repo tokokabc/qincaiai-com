@@ -45,8 +45,8 @@ function io_qincai_header_menu_items(){
 
 function io_qincai_render_main_nav(){
     $items = io_qincai_header_menu_items();
-    echo '<div class="qincai-navbar-header-menu">';
-    echo '<ul class="nav navbar-header qincai-navbar-header d-none d-md-flex mr-3">';
+    echo '<div class="qincai-navbar-header-menu d-none d-md-flex">';
+    echo '<ul class="nav navbar-header qincai-navbar-header mr-3">';
     foreach ($items as $item) {
         echo '<li class="menu-item"><a href="' . esc_url($item['href']) . '">' . esc_html($item['label']) . '</a></li>';
     }

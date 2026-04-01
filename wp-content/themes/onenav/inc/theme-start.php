@@ -275,10 +275,6 @@ function theme_load_scripts() {
     }
     $css['main'] = 'main' . $_min . '.css';
 
-    if (is_home() || is_front_page()) {
-        $css['qincai-home'] = 'home-qincai.css';
-    }
-
     foreach ($css as $key => $value) {
         $href = $value;
         if (strstr($href, '//') === false) {

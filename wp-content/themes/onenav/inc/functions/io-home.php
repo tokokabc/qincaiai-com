@@ -14,27 +14,12 @@ function io_home_content($config)
     if (empty($config['page_module'])) {
         return;
     }
-
-    echo '<div class="qincai-home-page">';
-    get_template_part('templates/home-hero');
-    echo '<div class="qincai-home-shell">';
-    echo '<div class="qincai-main-grid">';
-
     if ($config['aside_show']) {
-        echo '<div class="qincai-left-sidebar">';
+        // 显示侧栏菜单
         io_show_layout_aside($config['page_module']);
-        echo '</div>';
     }
-
-    echo '<div class="qincai-center-content">';
+    // 显示页面内容模块
     io_show_page_module($config['page_module']);
-    echo '</div>';
-
-    get_template_part('templates/home-right-aside');
-
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
 }
 
 /**

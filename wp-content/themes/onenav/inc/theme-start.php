@@ -300,6 +300,11 @@ function theme_load_scripts() {
         wp_enqueue_script($key, $src, $value[1], get_assets_version($src), $value[2]);
     }
 
+    if (is_home() || is_front_page()) {
+        $mobile_home_js = get_theme_file_uri('/assets/js/qincai-home-mobile.js');
+        wp_enqueue_script('qincai-home-mobile', $mobile_home_js, array(), get_assets_version($mobile_home_js), true);
+    }
+
     // 注册 webuploader.html5only.js
     wp_register_script('webuploader', get_theme_file_uri('/assets/js/webuploader.html5only' . $_min . '.js'), array('jquery'), IO_VERSION, true);
 

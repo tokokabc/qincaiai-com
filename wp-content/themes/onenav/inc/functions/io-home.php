@@ -32,6 +32,7 @@ function io_qincai_center_sections() {
         array('title' => 'AI 教程 / 资讯', 'desc' => '教程资源、学习网站、提示词、资讯内容集中展示。', 'cards' => array('提示词库','AI教程合集','部署指南','实战案例','AI资讯快讯','Agent周报','模型评测','工具盘点','入门路线图','学习导航','行业观察','自动化案例')),
         array('title' => 'Claw / Agent 生态', 'desc' => '聚合 Claw 小龙虾、Agent 生态、支付、Skills 市场等场景。', 'cards' => array('Claw小龙虾','Agent生态','Agent支付','AISkills市场','AIMaaS平台','AI开发平台','云端部署','Coding Plan','自动化工作流','多Agent协作','技能商店','企业入口')),
         array('title' => '设计 / 办公 / 音频', 'desc' => '把办公效率、音频创作、设计生产力补齐到首页中部。', 'cards' => array('Figma AI','Photoshop AI','剪映AI','讯飞听见','Suno','Adobe Firefly','WPS AI','飞书智能伙伴','AI思维导图','会议纪要','配音工具','音乐生成')),
+        array('title' => '开发 / 部署 / Prompt', 'desc' => '把部署、开发平台、提示词与内容检测也补到首页主模块。', 'cards' => array('Vercel AI','Railway','Cloudflare AI','Prompt库','提示词优化','内容检测','Agent支付','AIMaaS平台','云部署清单','OpenAPI聚合','日志监控','团队协作')),
     );
 }
 function io_home_content($config){
@@ -41,7 +42,7 @@ function io_home_content($config){
     echo '<div class="qincai-left-sidebar"><div class="qincai-left-sidebar__header"><h3>分类导航</h3><p>快速定位 AI 工具与平台</p></div>';
     io_show_layout_aside($config['page_module']);
     echo '</div>';
-    echo '<div class="qincai-center-content"><div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排，提高模块数量、卡片密度与主内容区信息量。</p></div>';
+    echo '<div class="qincai-center-content"><div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按效果图将主内容区做成多分区、多卡片、高密度的信息布局。</p></div>';
     io_show_page_module($config['page_module']);
     echo '</div>';
     get_template_part('templates/home-right-aside');

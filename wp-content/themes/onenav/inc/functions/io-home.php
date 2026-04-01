@@ -1,8 +1,5 @@
 <?php
-/*
- * Qincai homepage shell.
- */
-
+/* Qincai homepage shell. */
 function io_qincai_left_categories() {
     return array(
         array('name' => 'Claw小龙虾', 'icon' => 'iconfont icon-hot', 'href' => '#module_id_1'),
@@ -28,104 +25,47 @@ function io_qincai_left_categories() {
         array('name' => 'Coding Plan', 'icon' => 'iconfont icon-plan', 'href' => '#module_id_21'),
     );
 }
-
 function io_qincai_center_sections() {
     return array(
-        array(
-            'title' => 'AI 工具精选',
-            'desc'  => '优先展示聊天、写作、绘图、视频、办公与编程类高频入口。',
-            'cards' => array('ChatGPT', 'Claude', 'Kimi', '豆包', 'Cursor', 'Midjourney'),
-        ),
-        array(
-            'title' => 'AI 平台 / 模型',
-            'desc'  => '面向大模型、MaaS、Agent 与开发平台的中台入口。',
-            'cards' => array('DeepSeek', 'Gemini', 'OpenClaw', 'Dify', 'Coze', '硅基流动'),
-        ),
-        array(
-            'title' => 'AI 教程 / 资讯',
-            'desc'  => '把教程资源、学习网站、提示词、资讯内容集中到首页中区。',
-            'cards' => array('提示词库', 'AI教程合集', '部署指南', '实战案例', 'AI资讯快讯', 'Agent周报'),
-        ),
+        array('title' => 'AI 工具精选', 'desc' => '聊天、写作、绘图、视频、办公、编程等高频入口。', 'cards' => array('ChatGPT', 'Claude', 'Kimi', '豆包', 'Cursor', 'Midjourney')),
+        array('title' => 'AI 平台 / 模型', 'desc' => '大模型、MaaS、Agent、开发平台等中台入口。', 'cards' => array('DeepSeek', 'Gemini', 'OpenClaw', 'Dify', 'Coze', '硅基流动')),
+        array('title' => 'AI 教程 / 资讯', 'desc' => '教程资源、学习网站、提示词、资讯内容集中展示。', 'cards' => array('提示词库', 'AI教程合集', '部署指南', '实战案例', 'AI资讯快讯', 'Agent周报')),
     );
 }
-
-function io_home_content($config)
-{
-    if (empty($config['page_module'])) {
-        return;
-    }
-
+function io_home_content($config){
+    if (empty($config['page_module'])) return;
     echo '<div class="qincai-home-page">';
     get_template_part('templates/home-hero');
-    echo '<div class="qincai-home-shell">';
-    echo '<div class="qincai-main-grid">';
-
+    echo '<div class="qincai-home-shell"><div class="qincai-main-grid">';
     if ($config['aside_show']) {
-        echo '<div class="qincai-left-sidebar">';
-        echo '<div class="qincai-left-sidebar__header"><h3>分类导航</h3><p>快速定位 AI 工具与平台</p></div>';
+        echo '<div class="qincai-left-sidebar"><div class="qincai-left-sidebar__header"><h3>分类导航</h3><p>快速定位 AI 工具与平台</p></div>';
         io_show_layout_aside($config['page_module']);
         echo '</div>';
     }
-
-    echo '<div class="qincai-center-content">';
-    echo '<div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排。</p></div>';
+    echo '<div class="qincai-center-content"><div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排。</p></div>';
     io_show_page_module($config['page_module']);
     echo '</div>';
-
     get_template_part('templates/home-right-aside');
-
-    echo '</div>';
-    echo '</div>';
-    echo '</div>';
+    echo '</div></div></div>';
 }
-
 function io_show_layout_aside($modules){
-    $categories = io_qincai_left_categories();
     $nav = '';
-    foreach ($categories as $item) {
+    foreach (io_qincai_left_categories() as $item) {
         $nav .= '<li class="aside-item"><a href="' . esc_url($item['href']) . '" class="aside-btn hide-target smooth"><i class="' . esc_attr($item['icon']) . ' icon-fw"></i><span class="ml-2 qincai-aside-text">' . esc_html($item['name']) . '</span></a></li>';
     }
     echo '<aside class="ioui-aside switch-container' . get_page_mode_class() . '"><div class="aside-body" id="layout_aside"><div class="aside-card blur-bg shadow h-100"><ul class="aside-ul overflow-y-auto no-scrollbar">' . $nav . '</ul></div></div></aside>';
 }
-
-function io_show_page_module($modules)
-{
-    $sections = io_qincai_center_sections();
-    foreach ($sections as $index => $section) {
-        echo '<section id="module_id_' . ($index + 1) . '" class="qincai-home-module qincai-home-module--manual">';
-        echo '<div class="content-layout">';
-        echo '<div class="content-card">';
-        echo '<div class="tab-title">' . esc_html($section['title']) . '</div>';
-        echo '<p class="text-sm">' . esc_html($section['desc']) . '</p>';
-        echo '<div class="qincai-module-grid">';
+function io_show_page_module($modules){
+    foreach (io_qincai_center_sections() as $index => $section) {
+        echo '<section id="module_id_' . ($index + 1) . '" class="qincai-home-module qincai-home-module--manual"><div class="content-layout"><div class="content-card"><div class="tab-title">' . esc_html($section['title']) . '</div><p class="text-sm">' . esc_html($section['desc']) . '</p><div class="qincai-module-grid">';
         foreach ($section['cards'] as $card) {
-            echo '<a class="qincai-module-card" href="#">';
-            echo '<span class="qincai-module-card__title">' . esc_html($card) . '</span>';
-            echo '<span class="qincai-module-card__meta">进入查看</span>';
-            echo '</a>';
+            echo '<a class="qincai-module-card" href="#"><span class="qincai-module-card__title">' . esc_html($card) . '</span><span class="qincai-module-card__meta">进入查看</span></a>';
         }
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</section>';
+        echo '</div></div></div></section>';
     }
 }
-
 function io_home_content_before_action(){}
 add_action('io_home_content_before', 'io_home_content_before_action');
-
 function io_home_content_after_action(){}
 add_action('io_home_content_after', 'io_home_content_after_action');
-
-function io_module_search($config, $index){
-    io_head_search($config['search_id'], $index);
-}
-
-function io_module_is_there_sidebar($config, &$is_sidebar, &$sidebar_id) {
-    $sidebar_id = '';
-    $is_sidebar = false;
-}
-
-function io_module_content($config, $index = 0){}
-function io_module_tools($config, $index) {}
-function io_module_custom($config, $index){}
+function io_module_search($config, $index){io_head_search($config['search_id'], $index);} function io_module_is_there_sidebar($config, &$is_sidebar, &$sidebar_id){$sidebar_id='';$is_sidebar=false;} function io_module_content($config,$index=0){} function io_module_tools($config,$index){} function io_module_custom($config,$index){}

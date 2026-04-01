@@ -1,6 +1,6 @@
 <?php
 /*
- * Qincai homepage header rebuild.
+ * Qincai homepage header rebuild with original logo chain.
  */
 
 if (!function_exists('io_qincai_header_menu_items')) {
@@ -15,6 +15,20 @@ if (!function_exists('io_qincai_header_menu_items')) {
             array('label' => 'AI开发平台', 'href' => '#module_id_7'),
             array('label' => 'AI学习网站', 'href' => '#module_id_8'),
         );
+    }
+}
+
+if (!function_exists('io_qincai_render_brand')) {
+    function io_qincai_render_brand() {
+        echo '<div class="navbar-logo d-flex mr-4">';
+        if (function_exists('io_get_logo_html')) {
+            echo io_get_logo_html();
+        } elseif (function_exists('the_custom_logo') && has_custom_logo()) {
+            the_custom_logo();
+        } else {
+            echo '<a class="qincai-brand qincai-brand--fallback" href="' . esc_url(home_url('/')) . '"><span class="qincai-brand__mark">芹</span><span class="qincai-brand__text"><strong>' . esc_html(get_bloginfo('name')) . '</strong><small>' . esc_html(get_bloginfo('description')) . '</small></span></a>';
+        }
+        echo '</div>';
     }
 }
 
@@ -53,9 +67,7 @@ if (!function_exists('io_show_header')) {
         echo '<header class="main-header header-fixed qincai-header">';
         echo '<div class="header-nav blur-bg">';
         echo '<nav class="switch-container container-header nav-top qincai-nav-top d-flex align-items-center h-100">';
-        echo '<div class="navbar-logo d-flex mr-4">';
-        echo '<a class="qincai-brand" href="' . esc_url(home_url('/')) . '"><span class="qincai-brand__mark">芹</span><span class="qincai-brand__text"><strong>芹菜AI</strong><small>AI工具导航平台</small></span></a>';
-        echo '</div>';
+        io_qincai_render_brand();
         io_qincai_render_header_menu();
         io_qincai_render_header_tools();
         echo '</nav>';
@@ -68,7 +80,7 @@ if (!function_exists('io_show_mobile_header')) {
     function io_show_mobile_header(){
         echo '<div class="qincai-mobile-nav d-md-none">';
         echo '<div class="qincai-mobile-nav__inner">';
-        echo '<a class="qincai-mobile-nav__brand" href="' . esc_url(home_url('/')) . '">芹菜AI</a>';
+        echo '<a class="qincai-mobile-nav__brand" href="' . esc_url(home_url('/')) . '">' . esc_html(get_bloginfo('name')) . '</a>';
         echo '<a class="qincai-mobile-nav__search" href="#qincai-home-search">搜索工具</a>';
         echo '</div>';
         echo '</div>';

@@ -18,7 +18,7 @@ if (!function_exists('io_qincai_header_menu_items')) {
 
 if (!function_exists('io_qincai_render_brand')) {
     function io_qincai_render_brand() {
-        echo '<div class="navbar-logo d-flex mr-4">';
+        echo '<div class="qincai-header-brand">';
         if (function_exists('io_get_logo_html')) {
             echo io_get_logo_html();
         } elseif (function_exists('the_custom_logo') && has_custom_logo()) {
@@ -34,7 +34,7 @@ if (!function_exists('io_qincai_render_header_menu')) {
     function io_qincai_render_header_menu() {
         $items = io_qincai_header_menu_items();
         echo '<div class="qincai-navbar-header-menu">';
-        echo '<ul class="nav navbar-header qincai-navbar-header d-none d-md-flex mr-3">';
+        echo '<ul class="qincai-navbar-header">';
         foreach ($items as $item) {
             echo '<li class="menu-item"><a href="' . esc_url($item['href']) . '">' . esc_html($item['label']) . '</a></li>';
         }
@@ -45,11 +45,9 @@ if (!function_exists('io_qincai_render_header_menu')) {
 
 if (!function_exists('io_qincai_render_header_tools')) {
     function io_qincai_render_header_tools() {
-        echo '<div class="qincai-header-fill flex-fill"></div>';
-        echo '<ul class="nav header-tools qincai-header-tools position-relative">';
-        echo '<li class="header-icon-btn nav-search"><a href="#qincai-home-search" class="search-ico-btn nav-search-icon"><i class="iconfont icon-search"></i></a></li>';
-        echo '<li class="header-icon-btn nav-submit d-none d-md-block"><a href="#qincai-main-content" title="提交工具"><i class="iconfont icon-add"></i></a></li>';
-        echo '</ul>';
+        echo '<div class="qincai-header-tools">';
+        echo '<a class="qincai-header-tool" href="#qincai-home-search" title="搜索"><i class="iconfont icon-search"></i></a>';
+        echo '</div>';
     }
 }
 
@@ -64,11 +62,11 @@ if (!function_exists('io_show_header')) {
     function io_show_header(){
         echo '<header class="main-header header-fixed qincai-header">';
         echo '<div class="header-nav blur-bg">';
-        echo '<nav class="switch-container container-header nav-top qincai-nav-top d-flex align-items-center h-100">';
+        echo '<div class="qincai-header-row container-header">';
         io_qincai_render_brand();
         io_qincai_render_header_menu();
         io_qincai_render_header_tools();
-        echo '</nav>';
+        echo '</div>';
         echo '</div>';
         echo '</header>';
     }

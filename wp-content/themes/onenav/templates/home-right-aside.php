@@ -1,9 +1,9 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 $ranking_items = array(
-    array('name' => 'ChatGPT', 'tag' => '对话'),
-    array('name' => 'Claude', 'tag' => 'Agent'),
-    array('name' => 'DeepSeek', 'tag' => '模型'),
+    array('name' => 'ChatGPT', 'tag' => 'Top1'),
+    array('name' => 'Claude', 'tag' => 'Top2'),
+    array('name' => 'DeepSeek', 'tag' => 'Top3'),
     array('name' => 'Gemini', 'tag' => '搜索'),
     array('name' => 'Cursor', 'tag' => '编程'),
     array('name' => 'Midjourney', 'tag' => '绘图'),
@@ -37,13 +37,9 @@ $latest_items = array('OpenClaw', 'Kimi', 'Coze', 'Runway');
             <?php endforeach; ?>
         </div>
     </section>
-    <section class="qincai-panel qincai-community-panel">
-        <div class="qincai-panel__header"><h3>投稿 / 社群</h3></div>
-        <p class="qincai-community-panel__text">右侧栏保留真实运营位：提交工具、加入社群、商务合作。</p>
-        <div class="qincai-community-links">
-            <a class="qincai-community-links__item" href="javascript:;"><strong>提交工具</strong><span>补充你的 AI 产品入口</span></a>
-            <a class="qincai-community-links__item" href="javascript:;"><strong>加入社群</strong><span>获取更新提醒和玩法讨论</span></a>
-            <a class="qincai-community-links__item" href="javascript:;"><strong>商务合作</strong><span>品牌露出 / 流量合作 / 栏位合作</span></a>
-        </div>
+    <section class="qincai-panel qincai-qrcode-panel">
+        <div class="qincai-panel__header"><h3>扫码进群</h3></div>
+        <div class="qincai-qrcode-panel__box"><div class="qincai-qrcode-panel__placeholder">120 × 120 二维码位</div></div>
+        <p class="qincai-community-panel__text">右侧预留社群转化位</p>
     </section>
 </aside>

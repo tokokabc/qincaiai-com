@@ -35,15 +35,12 @@ function io_qincai_center_sections() {
     );
 }
 function io_home_content($config){
-    if (empty($config['page_module'])) return;
     echo '<div class="qincai-home-page">';
     get_template_part('templates/home-hero');
     echo '<div class="qincai-home-shell"><div class="qincai-main-grid">';
-    if ($config['aside_show']) {
-        echo '<div class="qincai-left-sidebar"><div class="qincai-left-sidebar__header"><h3>分类导航</h3><p>快速定位 AI 工具与平台</p></div>';
-        io_show_layout_aside($config['page_module']);
-        echo '</div>';
-    }
+    echo '<div class="qincai-left-sidebar"><div class="qincai-left-sidebar__header"><h3>分类导航</h3><p>快速定位 AI 工具与平台</p></div>';
+    io_show_layout_aside($config['page_module']);
+    echo '</div>';
     echo '<div class="qincai-center-content"><div class="qincai-center-content__header"><h2>首页核心模块</h2><p>按工具、平台、模型、教程、资讯进行平台化编排，提高模块数量、卡片密度与主内容区信息量。</p></div>';
     io_show_page_module($config['page_module']);
     echo '</div>';
@@ -64,7 +61,7 @@ function io_show_page_module($modules){
         echo '<div class="qincai-module-head"><div><div class="tab-title">' . esc_html($section['title']) . '</div><p class="text-sm">' . esc_html($section['desc']) . '</p></div><a class="btn-more" href="#">查看更多</a></div>';
         echo '<div class="qincai-module-grid">';
         foreach ($section['cards'] as $card) {
-            echo '<a class="qincai-module-card" href="#"><span class="qincai-module-card__title">' . esc_html($card) . '</span><span class="qincai-module-card__meta">立即进入</span></a>';
+            echo '<a class="qincai-module-card" href="#"><span class="qincai-module-card__logo">AI</span><span class="qincai-module-card__title">' . esc_html($card) . '</span><span class="qincai-module-card__desc">精选 AI 工具入口</span></a>';
         }
         echo '</div></div></div></section>';
     }

@@ -6,14 +6,12 @@
 if (!function_exists('io_qincai_header_menu_items')) {
     function io_qincai_header_menu_items() {
         return array(
-            array('label' => 'AI聊天助手', 'href' => '#module_id_1'),
-            array('label' => 'AI绘图工具', 'href' => '#module_id_2'),
-            array('label' => 'AI视频工具', 'href' => '#module_id_3'),
-            array('label' => 'AI办公工具', 'href' => '#module_id_4'),
-            array('label' => 'AI编程工具', 'href' => '#module_id_5'),
-            array('label' => 'Agent生态', 'href' => '#module_id_6'),
-            array('label' => 'AI开发平台', 'href' => '#module_id_7'),
-            array('label' => 'AI学习网站', 'href' => '#module_id_8'),
+            array('label' => 'AI 工具', 'href' => '#module_id_1'),
+            array('label' => 'AI大模型', 'href' => '#module_id_2'),
+            array('label' => 'AI云端部署', 'href' => '#module_id_3'),
+            array('label' => 'AI教程资源', 'href' => '#module_id_4'),
+            array('label' => 'AI资讯', 'href' => '#module_id_5'),
+            array('label' => 'Claw生态', 'href' => '#module_id_6'),
         );
     }
 }
